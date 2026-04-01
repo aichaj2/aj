@@ -2,7 +2,7 @@
   "name": "a-j-modest",
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://aichaj2.github.io/ajm",
+  "homepage": "https://github.com/aichaj2/aj.git",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
