@@ -2,11 +2,11 @@
   "name": "a-j-modest",
   "version": "1.0.0",
   "type": "module",
-  "homepage": "https://github.com/aichaj2/aj.git",
+  "homepage": "https://aichaj2.github.io/aj",
   "scripts": {
     "dev": "vite",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "gh-pages -d dist",
     "build": "vite build",
     "preview": "vite preview"
   },
