@@ -26,7 +26,7 @@ function Hero() {
           </button>
         </div>
         <div className="hero-image slide-up delay-5">
-          <img src="/img/logo.jpeg" alt="A&J Modest" className="hero-img" />
+          <img src={`${import.meta.env.BASE_URL}img/logo.jpeg`} alt="A&J Modest" className="hero-img" />
         </div>
       </div>
     </section>
