@@ -9,7 +9,7 @@ function ProductCard({ product, onAddToCart }) {
         <img src={product.image} alt={product.name} />
         <span className="product-price">{product.price} MAD</span>
       </div>
-      <div className="product-details">
+      <div className="product-info">
         <h3 className="product-name">{product.name}</h3>
         <p className="product-spec">Fabric: {product.fabric}</p>
         <select 

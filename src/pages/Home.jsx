@@ -2,7 +2,11 @@ import React from 'react'
 import Hero from '../components/Hero'
 
 function Home() {
-  return <Hero />
+  return (
+    <div className="page">
+      <Hero />
+    </div>
+  )
 }
 
 export default Home

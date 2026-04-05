@@ -2,12 +2,12 @@ import React, { useState, useEffect } from 'react'
 
 // Products Data
 const products = [
-  { id: 1, name: "Soft Beige Abaya", price: 349, fabric: "Premium Crepe", color: "#d4c4b5", image: "/img/a.jpeg" },
-  { id: 2, name: "Dusty Rose Kimono", price: 399, fabric: "Luxury Chiffon", color: "#d4a5a5", image: "/img/b.jpeg" },
-  { id: 3, name: "Olive Elegance Set", price: 449, fabric: "Soft Linen Blend", color: "#a8b5a0", image: "/img/c.jpeg" },
-  { id: 4, name: "Cream Pearl Abaya", price: 379, fabric: "Silk Touch Crepe", color: "#f5f0e8", image: "/img/e.jpeg" },
-  { id: 5, name: "Mocha Dream Dress", price: 329, fabric: "Flowy Georgette", color: "#b5a090", image: "/img/f.jpeg" },
-  { id: 6, name: "Blush Pink Set", price: 419, fabric: "Premium Medina Silk", color: "#e8c4c4", image: "/img/i.jpeg" }
+  { id: 1, name: "Soft Beige Abaya", price: 349, fabric: "Premium Crepe", color: "#d4c4b5", image: `${import.meta.env.BASE_URL}img/a.jpeg` },
+  { id: 2, name: "Dusty Rose Kimono", price: 399, fabric: "Luxury Chiffon", color: "#d4a5a5", image: `${import.meta.env.BASE_URL}img/b.jpeg` },
+  { id: 3, name: "Olive Elegance Set", price: 449, fabric: "Soft Linen Blend", color: "#a8b5a0", image: `${import.meta.env.BASE_URL}img/c.jpeg` },
+  { id: 4, name: "Cream Pearl Abaya", price: 379, fabric: "Silk Touch Crepe", color: "#f5f0e8", image: `${import.meta.env.BASE_URL}img/e.jpeg` },
+  { id: 5, name: "Mocha Dream Dress", price: 329, fabric: "Flowy Georgette", color: "#b5a090", image: `${import.meta.env.BASE_URL}img/f.jpeg` },
+  { id: 6, name: "Blush Pink Set", price: 419, fabric: "Premium Medina Silk", color: "#e8c4c4", image: `${import.meta.env.BASE_URL}img/i.jpeg` }
 ]
 
 function Shop() {

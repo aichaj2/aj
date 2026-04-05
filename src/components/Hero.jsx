@@ -19,7 +19,7 @@ function Hero() {
             Discover our soft and minimalist designs created for modern modest women
           </p>
           <button 
-            onClick={() => navigate(`${import.meta.env.BASE_URL}shop`)} 
+            onClick={() => navigate('/shop')}
             className="btn-primary slide-up delay-4"
           >
             🛍️ Shop Now

@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Cart() {
+  const navigate = useNavigate()
   const [cartItems, setCartItems] = useState([])
   const [customerInfo, setCustomerInfo] = useState({
     name: '',
@@ -111,93 +113,97 @@ function Cart() {
 
   if (cartItems.length === 0) {
     return (
-      <div className="container">
-        <div className="empty-cart">
-          <div className="empty-cart-icon">🛒</div>
-          <h3>Your cart is empty</h3>
-          <p>Add some beautiful pieces to your cart</p>
-          <button onClick={() => window.location.href = '/shop'} className="btn-primary">
-            Shop Now
-          </button>
+      <div className="page">
+        <div className="container">
+          <div className="empty-cart">
+            <div className="empty-cart-icon">🛒</div>
+            <h3>Your cart is empty</h3>
+            <p>Add some beautiful pieces to your cart</p>
+            <button onClick={() => navigate('/shop')} className="btn-primary">
+              Shop Now
+            </button>
+          </div>
         </div>
       </div>
     )
   }
 
   return (
-    <div className="container">
-      <div className="section-header">
-        <p className="section-label">Shopping Cart</p>
-        <h2 className="section-title">Your Order</h2>
-        <div className="section-divider"></div>
-      </div>
+    <div className="page">
+      <div className="container">
+        <div className="section-header">
+          <p className="section-label">Shopping Cart</p>
+          <h2 className="section-title">Your Order</h2>
+          <div className="section-divider"></div>
+        </div>
       
-      <div className="cart-layout">
-        <div className="cart-items">
-          {cartItems.map((item, index) => (
-            <div key={index} className="cart-item">
-              <img src={item.image} alt={item.name} className="cart-item-image" />
-              <div className="cart-item-details">
-                <h4 className="cart-item-name">{item.name}</h4>
-                <p className="cart-item-price">{item.price} MAD</p>
-                <p className="cart-item-size">Size: {item.size}</p>
-                <div className="cart-item-quantity">
-                  <button onClick={() => updateQuantity(item.id, item.size, -1)} className="quantity-btn">−</button>
-                  <span className="quantity-number">{item.quantity}</span>
-                  <button onClick={() => updateQuantity(item.id, item.size, 1)} className="quantity-btn">+</button>
-                  <button onClick={() => removeItem(item.id, item.size)} className="remove-btn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
-                    </svg>
-                  </button>
+        <div className="cart-layout">
+          <div className="cart-items">
+            {cartItems.map((item, index) => (
+              <div key={index} className="cart-item">
+                <img src={item.image} alt={item.name} className="cart-item-image" />
+                <div className="cart-item-details">
+                  <h4 className="cart-item-name">{item.name}</h4>
+                  <p className="cart-item-price">{item.price} MAD</p>
+                  <p className="cart-item-size">Size: {item.size}</p>
+                  <div className="cart-item-quantity">
+                    <button onClick={() => updateQuantity(item.id, item.size, -1)} className="quantity-btn">−</button>
+                    <span className="quantity-number">{item.quantity}</span>
+                    <button onClick={() => updateQuantity(item.id, item.size, 1)} className="quantity-btn">+</button>
+                    <button onClick={() => removeItem(item.id, item.size)} className="remove-btn">
+                      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                      </svg>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         
-        <div className="cart-summary">
-          <h3 className="summary-title">Order Summary</h3>
+          <div className="cart-summary">
+            <h3 className="summary-title">Order Summary</h3>
           
-          <div className="customer-info-form">
-            <h4 className="form-subtitle">📋 Your Information</h4>
-            <div className="form-group">
-              <label className="form-label">Full Name *</label>
-              <input type="text" name="name" className="form-input" placeholder="Enter your full name" onChange={handleInputChange} required />
+            <div className="customer-info-form">
+              <h4 className="form-subtitle">📋 Your Information</h4>
+              <div className="form-group">
+                <label className="form-label">Full Name *</label>
+                <input type="text" name="name" className="form-input" placeholder="Enter your full name" onChange={handleInputChange} required />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Phone Number *</label>
+                <input type="tel" name="phone" className="form-input" placeholder="06xxxxxxxx" onChange={handleInputChange} required />
+              </div>
+              <div className="form-group">
+                <label className="form-label">City *</label>
+                <input type="text" name="city" className="form-input" placeholder="Enter your city" onChange={handleInputChange} required />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Full Address *</label>
+                <textarea name="address" className="form-input" rows="2" placeholder="Street, building, apartment number..." onChange={handleInputChange} required></textarea>
+              </div>
             </div>
-            <div className="form-group">
-              <label className="form-label">Phone Number *</label>
-              <input type="tel" name="phone" className="form-input" placeholder="06xxxxxxxx" onChange={handleInputChange} required />
-            </div>
-            <div className="form-group">
-              <label className="form-label">City *</label>
-              <input type="text" name="city" className="form-input" placeholder="Enter your city" onChange={handleInputChange} required />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Full Address *</label>
-              <textarea name="address" className="form-input" rows="2" placeholder="Street, building, apartment number..." onChange={handleInputChange} required></textarea>
-            </div>
-          </div>
           
-          <div className="summary-row">
-            <span>Subtotal</span>
-            <span>{subtotal} MAD</span>
-          </div>
-          <div className="summary-row">
-            <span>Shipping</span>
-            <span>{shipping.cost === 0 ? 'Free' : shipping.cost + ' MAD'}</span>
-          </div>
-          <div className="summary-row total-row">
-            <span>Total</span>
-            <span>{total} MAD</span>
-          </div>
+            <div className="summary-row">
+              <span>Subtotal</span>
+              <span>{subtotal} MAD</span>
+            </div>
+            <div className="summary-row">
+              <span>Shipping</span>
+              <span>{shipping.cost === 0 ? 'Free' : shipping.cost + ' MAD'}</span>
+            </div>
+            <div className="summary-row total-row">
+              <span>Total</span>
+              <span>{total} MAD</span>
+            </div>
           
-          <button onClick={checkout} className="btn-primary full-width">
-            ✅ Confirm Order
-          </button>
-          <button onClick={() => window.location.href = '/shop'} className="btn-secondary full-width">
-            ← Continue Shopping
-          </button>
+            <button onClick={checkout} className="btn-primary full-width">
+              ✅ Confirm Order
+            </button>
+            <button onClick={() => navigate('/shop')} className="btn-secondary full-width">
+              ← Continue Shopping
+            </button>
+          </div>
         </div>
       </div>
     </div>

@@ -20,16 +20,22 @@
   --stone: #d4c4b5;
 }
 
-html, body {
+html, body, #root {
+  height: 100%;
+}
+body {
   font-family: 'Montserrat', sans-serif;
   background-color: var(--background);
   color: var(--text);
   line-height: 1.6;
-  height: 100%;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-body {
-  overflow-x: hidden;
+#root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
 
 /* Utilities */

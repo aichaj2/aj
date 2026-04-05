@@ -151,8 +151,7 @@
   background: linear-gradient(135deg, var(--background) 0%, rgba(253, 164, 175, 0.1) 50%, rgba(250, 204, 21, 0.05) 100%);
   display: flex;
   align-items: center;
-  padding-top: 100px;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 
 .hero-content {
@@ -297,12 +296,7 @@
 /* ============================================
    PAGE CONTAINERS
    ============================================ */
-.page {
-  min-height: 100vh;
-  padding-top: 80px;
-  animation: fadeIn 0.8s ease forwards;
-  opacity: 0;
-}
+
 
 .container {
   max-width: 1280px;
@@ -1244,36 +1238,34 @@
     font-size: 1.2rem;
   }
 }
-/* إزالة المسافات الزائدة */
-.page {
-  min-height: calc(100vh - 70px); /* 70px هو ارتفاع الـ Navbar */
-  padding-top: 80px;
-  margin-bottom: 0;
-}
 
-/* جعل الـ Footer يلتصق بالأسفل */
-html, body, #root {
-  height: 100%;
-}
 
-#root {
+
+
+
+
+
+
+
+
+
+
+.main-content {
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
 
-/* Navbar يبقى في الأعلى */
-.navbar {
-  flex-shrink: 0;
-}
-
-/* الصفحات تأخذ المساحة المتبقية */
 .page {
-  flex: 1;
-  min-height: auto;
+  min-height: calc(100vh - 80px);
+  padding-top: 80px;
+  animation: fadeIn 0.8s ease forwards;
+  opacity: 0;
+  margin-bottom: 0;
 }
 
-/* Footer يبقى في الأسفل */
+
+
 .footer {
-  flex-shrink: 0;
   margin-top: 0;
 }

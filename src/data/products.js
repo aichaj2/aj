@@ -5,7 +5,7 @@ export const products = [
     price: 349, 
     fabric: "Premium Crepe", 
     color: "#d4c4b5", 
-    image: "/img/a.jpeg" 
+    image: `${import.meta.env.BASE_URL}img/a.jpeg` 
   },
   { 
     id: 2, 
@@ -13,7 +13,7 @@ export const products = [
     price: 399, 
     fabric: "Luxury Chiffon", 
     color: "#d4a5a5", 
-    image: "/img/b.jpeg" 
+    image: `${import.meta.env.BASE_URL}img/b.jpeg` 
   },
   { 
     id: 3, 
@@ -21,7 +21,7 @@ export const products = [
     price: 449, 
     fabric: "Soft Linen Blend", 
     color: "#a8b5a0", 
-    image: "/img/c.jpeg" 
+    image: `${import.meta.env.BASE_URL}img/c.jpeg` 
   },
-  // ... باقي المنتجات
+  
 ]
