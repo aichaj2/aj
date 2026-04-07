@@ -41,7 +41,14 @@ function Contact() {
               </div>
               <div>
                 <p className="contact-label">Instagram</p>
-                <p className="contact-value">@a_j_modest</p>
+                <a
+                  href="https://instagram.com/a_j_modest" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="contact-value"
+                >
+                  @a_j_modest
+                </a>
               </div>
             </div>
             <div className="contact-item">
@@ -50,12 +57,16 @@ function Contact() {
               </div>
               <div>
                 <p className="contact-label">WhatsApp</p>
-                <p className="contact-value">0638063994</p>
+                <a 
+                  href="https://wa.me/212638063994" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="contact-value"
+                >
+                  0638063994
+                </a>
               </div>
             </div>
-            <button onClick={openWhatsApp} className="btn-whatsapp">
-              <span>Chat on WhatsApp</span>
-            </button>
           </div>
           <div className="contact-form-box">
             <h3 className="form-title">Send us a message</h3>

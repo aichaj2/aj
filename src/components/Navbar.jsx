@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const location = useLocation()
 
-  // جلب عدد المنتجات من localStorage
   useEffect(() => {
     const updateCartCount = () => {
       const cart = JSON.parse(localStorage.getItem('cart')) || []
@@ -15,16 +14,14 @@ function Navbar() {
     }
 
     updateCartCount()
-    
-    // تحديث العدد كلما تغيرت السلة
+
     window.addEventListener('cartUpdated', updateCartCount)
-    
+
     return () => {
       window.removeEventListener('cartUpdated', updateCartCount)
     }
   }, [])
 
-  // إغلاق القائمة عند تغيير الصفحة
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [location])
@@ -41,13 +38,21 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-brand">A&J Modest</Link>
-        
+
         {/* Desktop Navigation */}
         <div className="nav-links hidden-mobile">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/shop" className="nav-link">Shop</Link>
-          <Link to="/about" className="nav-link">About</Link>
-          <Link to="/contact" className="nav-link">Contact</Link>
+          <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Home
+          </NavLink>
+          <NavLink to="/shop" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Shop
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            About
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Contact
+          </NavLink>
           <Link to="/cart" className="nav-link cart-button">
             🛒
             <span className="cart-count" style={{ display: cartCount > 0 ? 'flex' : 'none' }}>
@@ -66,11 +71,21 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${!isMobileMenuOpen ? 'hidden' : ''}`}>
-        <Link to="/" onClick={closeMobileMenu} className="mobile-link">Home</Link>
-        <Link to="/shop" onClick={closeMobileMenu} className="mobile-link">Shop</Link>
-        <Link to="/about" onClick={closeMobileMenu} className="mobile-link">About</Link>
-        <Link to="/contact" onClick={closeMobileMenu} className="mobile-link">Contact</Link>
-        <Link to="/cart" onClick={closeMobileMenu} className="mobile-link">🛒</Link>
+        <NavLink to="/" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Home
+        </NavLink>
+        <NavLink to="/shop" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Shop
+        </NavLink>
+        <NavLink to="/about" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          About
+        </NavLink>
+        <NavLink to="/contact" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Contact
+        </NavLink>
+        <Link to="/cart" onClick={closeMobileMenu} className="mobile-link">
+          🛒 Cart {cartCount > 0 && `(${cartCount})`}
+        </Link>
       </div>
     </nav>
   )

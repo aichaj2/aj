@@ -155,8 +155,7 @@
   background: linear-gradient(135deg, var(--background) 0%, rgba(253, 164, 175, 0.1) 50%, rgba(250, 204, 21, 0.05) 100%);
   display: flex;
   align-items: center;
-  padding-top: 100px;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 
 .hero-content {
@@ -1245,16 +1244,6 @@
 }
 
 
-
-
-
-
-
-
-
-
-
-
 .main-content {
   flex: 1;
   display: flex;
@@ -1264,36 +1253,81 @@
 .page {
   min-height: calc(100vh - 80px);
   padding-top: 80px;
-  animation: fadeIn 0.8s ease forwards;
-  opacity: 0;
+  animation: fadeIn 0.5s ease;
   margin-bottom: 0;
 }
 
-.hero-section {
-  min-height: calc(100vh - 80px);
-}
+
 
 .footer {
   margin-top: 0;
 }
+.product-image img,
+.hero-img,
+.about-img,
+.cart-item-image {
+  background: #f5f5f5;
+}
+.btn-primary:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.form-input:focus,
+.size-select:focus {
+  outline: none;
+  border-color: var(--rose);
+  box-shadow: 0 0 0 3px rgba(253, 164, 175, 0.15);
+}
+.nav-link.active,
+.mobile-link.active {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+.contact-value {
+  font-size: 1.125rem;
+  color: var(--text);
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.contact-value:hover {
+  color: var(--rose);
+}
+.footer-text {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.6);
+  line-height: 1.6;
+  text-decoration: none;
+  display: block;
+}
+
+.footer-text:hover {
+  color: white;
+}
 
 ===== src/App.jsx =====
 
-// src/App.jsx 
-import React from 'react' 
-import { BrowserRouter, Routes, Route } from 'react-router-dom' 
-import Navbar from './components/Navbar' 
-import Home from './pages/Home' 
-import Footer from './components/Footer' 
-import Shop from './pages/Shop' 
-import About from './pages/About' 
-import Contact from './pages/Contact' 
-import Cart from './pages/Cart' 
-import './App.css' 
+// src/App.jsx
+import React from 'react'
+import { HashRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
+import Home from './pages/Home'
+import Footer from './components/Footer'
+import Shop from './pages/Shop'
+import About from './pages/About'
+import Contact from './pages/Contact'
+import Cart from './pages/Cart'
+import './App.css'
+import ScrollToTop from './components/ScrollToTop'
+import NotFound from './pages/NotFound'
 
 function App() { 
   return ( 
-    <BrowserRouter>
+    <HashRouter>
       <Navbar /> 
       <main className="main-content">
         <Routes> 
@@ -1305,7 +1339,7 @@ function App() {
         </Routes>
       </main> 
       <Footer /> 
-    </BrowserRouter> 
+    </HashRouter>
   ) 
 } 
 
@@ -1337,8 +1371,22 @@ function Footer() {
           </div>
           <div>
             <h4 className="footer-title">Follow Us</h4>
-            <p className="footer-text">Instagram: @a_j_modest</p>
-            <p className="footer-text">WhatsApp: 0638063994</p>
+            <a
+              href="https://instagram.com/a_j_modest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-text"
+            >
+              Instagram: @a_j_modest
+            </a>
+            <a
+              href="https://wa.me/212638063994"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-text"
+            >
+              WhatsApp: 0638063994
+            </a>
           </div>
         </div>
         <div className="footer-bottom">
@@ -1393,14 +1441,13 @@ export default Hero
 ===== src/components/Navbar.jsx =====
 
 import React, { useState, useEffect } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [cartCount, setCartCount] = useState(0)
   const location = useLocation()
 
-  // جلب عدد المنتجات من localStorage
   useEffect(() => {
     const updateCartCount = () => {
       const cart = JSON.parse(localStorage.getItem('cart')) || []
@@ -1409,16 +1456,14 @@ function Navbar() {
     }
 
     updateCartCount()
-    
-    // تحديث العدد كلما تغيرت السلة
+
     window.addEventListener('cartUpdated', updateCartCount)
-    
+
     return () => {
       window.removeEventListener('cartUpdated', updateCartCount)
     }
   }, [])
 
-  // إغلاق القائمة عند تغيير الصفحة
   useEffect(() => {
     setIsMobileMenuOpen(false)
   }, [location])
@@ -1435,13 +1480,21 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <Link to="/" className="nav-brand">A&J Modest</Link>
-        
+
         {/* Desktop Navigation */}
         <div className="nav-links hidden-mobile">
-          <Link to="/" className="nav-link">Home</Link>
-          <Link to="/shop" className="nav-link">Shop</Link>
-          <Link to="/about" className="nav-link">About</Link>
-          <Link to="/contact" className="nav-link">Contact</Link>
+          <NavLink to="/" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Home
+          </NavLink>
+          <NavLink to="/shop" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Shop
+          </NavLink>
+          <NavLink to="/about" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            About
+          </NavLink>
+          <NavLink to="/contact" className={({ isActive }) => isActive ? "nav-link active" : "nav-link"}>
+            Contact
+          </NavLink>
           <Link to="/cart" className="nav-link cart-button">
             🛒
             <span className="cart-count" style={{ display: cartCount > 0 ? 'flex' : 'none' }}>
@@ -1460,11 +1513,21 @@ function Navbar() {
 
       {/* Mobile Menu */}
       <div className={`mobile-menu ${!isMobileMenuOpen ? 'hidden' : ''}`}>
-        <Link to="/" onClick={closeMobileMenu} className="mobile-link">Home</Link>
-        <Link to="/shop" onClick={closeMobileMenu} className="mobile-link">Shop</Link>
-        <Link to="/about" onClick={closeMobileMenu} className="mobile-link">About</Link>
-        <Link to="/contact" onClick={closeMobileMenu} className="mobile-link">Contact</Link>
-        <Link to="/cart" onClick={closeMobileMenu} className="mobile-link">🛒</Link>
+        <NavLink to="/" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Home
+        </NavLink>
+        <NavLink to="/shop" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Shop
+        </NavLink>
+        <NavLink to="/about" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          About
+        </NavLink>
+        <NavLink to="/contact" onClick={closeMobileMenu} className={({ isActive }) => isActive ? "mobile-link active" : "mobile-link"}>
+          Contact
+        </NavLink>
+        <Link to="/cart" onClick={closeMobileMenu} className="mobile-link">
+          🛒 Cart {cartCount > 0 && `(${cartCount})`}
+        </Link>
       </div>
     </nav>
   )
@@ -1509,6 +1572,23 @@ function ProductCard({ product, onAddToCart }) {
 }
 
 export default ProductCard
+
+===== src/components/ScrollToTop.jsx =====
+
+import { useEffect } from 'react'
+import { useLocation } from 'react-router-dom'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [pathname])
+
+  return null
+}
+
+export default ScrollToTop
 
 ===== src/data/products.js =====
 
@@ -1940,7 +2020,14 @@ function Contact() {
               </div>
               <div>
                 <p className="contact-label">Instagram</p>
-                <p className="contact-value">@a_j_modest</p>
+                <a
+                  href="https://instagram.com/a_j_modest" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="contact-value"
+                >
+                  @a_j_modest
+                </a>
               </div>
             </div>
             <div className="contact-item">
@@ -1949,12 +2036,16 @@ function Contact() {
               </div>
               <div>
                 <p className="contact-label">WhatsApp</p>
-                <p className="contact-value">0638063994</p>
+                <a 
+                  href="https://wa.me/212638063994" 
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                  className="contact-value"
+                >
+                  0638063994
+                </a>
               </div>
             </div>
-            <button onClick={openWhatsApp} className="btn-whatsapp">
-              <span>Chat on WhatsApp</span>
-            </button>
           </div>
           <div className="contact-form-box">
             <h3 className="form-title">Send us a message</h3>
@@ -1990,24 +2081,38 @@ import React from 'react'
 import Hero from '../components/Hero'
 
 function Home() {
-  return <Hero />
+  return (
+      <Hero />
+  )
 }
 
 export default Home
 
+===== src/pages/NotFound.jsx =====
+
+import React from 'react'
+import { Link } from 'react-router-dom'
+
+function NotFound() {
+  return (
+    <div className="page">
+      <div className="container-small" style={{ textAlign: 'center' }}>
+        <h2 className="section-title">404</h2>
+        <p className="about-paragraph">Oops! This page does not exist.</p>
+        <Link to="/" className="btn-primary">Go Home</Link>
+      </div>
+    </div>
+  )
+}
+
+export default NotFound
+
 ===== src/pages/Shop.jsx =====
 
 import React, { useState, useEffect } from 'react'
+import { products } from '../data/products'
 
-// Products Data
-const products = [
-  { id: 1, name: "Soft Beige Abaya", price: 349, fabric: "Premium Crepe", color: "#d4c4b5", image: `${import.meta.env.BASE_URL}img/a.jpeg` },
-  { id: 2, name: "Dusty Rose Kimono", price: 399, fabric: "Luxury Chiffon", color: "#d4a5a5", image: `${import.meta.env.BASE_URL}img/b.jpeg` },
-  { id: 3, name: "Olive Elegance Set", price: 449, fabric: "Soft Linen Blend", color: "#a8b5a0", image: `${import.meta.env.BASE_URL}img/c.jpeg` },
-  { id: 4, name: "Cream Pearl Abaya", price: 379, fabric: "Silk Touch Crepe", color: "#f5f0e8", image: `${import.meta.env.BASE_URL}img/e.jpeg` },
-  { id: 5, name: "Mocha Dream Dress", price: 329, fabric: "Flowy Georgette", color: "#b5a090", image: `${import.meta.env.BASE_URL}img/f.jpeg` },
-  { id: 6, name: "Blush Pink Set", price: 419, fabric: "Premium Medina Silk", color: "#e8c4c4", image: `${import.meta.env.BASE_URL}img/i.jpeg` }
-]
+
 
 function Shop() {
   const [cart, setCart] = useState([])
@@ -2071,7 +2176,7 @@ function Shop() {
   }
 
   return (
-    <section className="page">
+    <div className="page">
       <div className="container">
         <div className="section-header">
           <p className="section-label">Curated Selection</p>
@@ -2114,7 +2219,7 @@ function Shop() {
           ))}
         </div>
       </div>
-    </section>
+    </div>
   )
 }
 

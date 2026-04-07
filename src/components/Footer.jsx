@@ -22,8 +22,22 @@ function Footer() {
           </div>
           <div>
             <h4 className="footer-title">Follow Us</h4>
-            <p className="footer-text">Instagram: @a_j_modest</p>
-            <p className="footer-text">WhatsApp: 0638063994</p>
+            <a
+              href="https://instagram.com/a_j_modest"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-text"
+            >
+              Instagram: @a_j_modest
+            </a>
+            <a
+              href="https://wa.me/212638063994"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer-text"
+            >
+              WhatsApp: 0638063994
+            </a>
           </div>
         </div>
         <div className="footer-bottom">
