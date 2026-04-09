@@ -1304,3 +1304,204 @@
 .footer-text:hover {
   color: white;
 }
+/* ============================================
+   CATEGORIES GRID
+   ============================================ */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.category-card {
+  cursor: pointer;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.category-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-image img {
+  transform: scale(1.08);
+}
+
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 1.5rem;
+}
+
+.category-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.category-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.category-description {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.category-count {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Back button */
+.back-to-shop {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-shop:hover {
+  border-color: var(--rose);
+  color: var(--text);
+  background: rgba(253, 164, 175, 0.05);
+}
+
+/* No products message */
+.no-products {
+  text-align: center;
+  padding: 3rem;
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.no-products p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .category-name {
+    font-size: 1.2rem;
+  }
+  
+  .category-icon {
+    font-size: 2rem;
+  }
+  
+  .category-description {
+    font-size: 0.7rem;
+  }
+  
+  .category-count {
+    font-size: 0.65rem;
+  }
+}
+/* ============================================
+   COLOR SELECTOR FOR HIJAB
+   ============================================ */
+.color-selector {
+  margin-bottom: 0.75rem;
+}
+
+.color-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.color-option.active {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--rose);
+  transform: scale(1.1);
+}
+
+/* For white color (add a border to see it) */
+.color-option[style*="background-color: #ffffff"],
+.color-option[style*="background-color: #fff"],
+.color-option[style*="background-color: white"] {
+  border: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .color-option {
+    width: 28px;
+    height: 28px;
+  }
+}

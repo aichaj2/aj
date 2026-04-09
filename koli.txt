@@ -1308,6 +1308,207 @@
 .footer-text:hover {
   color: white;
 }
+/* ============================================
+   CATEGORIES GRID
+   ============================================ */
+.categories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.category-card {
+  cursor: pointer;
+  border-radius: 1rem;
+  overflow: hidden;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  background: var(--surface);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.category-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+}
+
+.category-image {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+
+.category-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.category-card:hover .category-image img {
+  transform: scale(1.08);
+}
+
+.category-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.6) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: white;
+  padding: 1.5rem;
+}
+
+.category-icon {
+  font-size: 3rem;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.category-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 500;
+  margin-bottom: 0.5rem;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+}
+
+.category-description {
+  font-size: 0.8rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.category-count {
+  background: rgba(255,255,255,0.2);
+  backdrop-filter: blur(8px);
+  padding: 0.25rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+/* Back button */
+.back-to-shop {
+  background: transparent;
+  border: 1px solid var(--border);
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  font-size: 0.8rem;
+  color: var(--text-light);
+  cursor: pointer;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.back-to-shop:hover {
+  border-color: var(--rose);
+  color: var(--text);
+  background: rgba(253, 164, 175, 0.05);
+}
+
+/* No products message */
+.no-products {
+  text-align: center;
+  padding: 3rem;
+  background: var(--surface);
+  border-radius: 1rem;
+  border: 1px solid var(--border);
+}
+
+.no-products p {
+  color: var(--text-light);
+  margin-bottom: 1.5rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .categories-grid {
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+  }
+  
+  .category-name {
+    font-size: 1.2rem;
+  }
+  
+  .category-icon {
+    font-size: 2rem;
+  }
+  
+  .category-description {
+    font-size: 0.7rem;
+  }
+  
+  .category-count {
+    font-size: 0.65rem;
+  }
+}
+/* ============================================
+   COLOR SELECTOR FOR HIJAB
+   ============================================ */
+.color-selector {
+  margin-bottom: 0.75rem;
+}
+
+.color-label {
+  display: block;
+  font-size: 0.75rem;
+  color: var(--text-light);
+  margin-bottom: 0.5rem;
+}
+
+.color-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.color-option {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.color-option:hover {
+  transform: scale(1.1);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.color-option.active {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 0 2px var(--rose);
+  transform: scale(1.1);
+}
+
+/* For white color (add a border to see it) */
+.color-option[style*="background-color: #ffffff"],
+.color-option[style*="background-color: #fff"],
+.color-option[style*="background-color: white"] {
+  border: 1px solid var(--border);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .color-option {
+    width: 28px;
+    height: 28px;
+  }
+}
 
 ===== src/App.jsx =====
 
@@ -1321,6 +1522,7 @@ import Shop from './pages/Shop'
 import About from './pages/About'
 import Contact from './pages/Contact'
 import Cart from './pages/Cart'
+import CategoryPage from './pages/CategoryPage'
 import './App.css'
 import ScrollToTop from './components/ScrollToTop'
 import NotFound from './pages/NotFound'
@@ -1328,14 +1530,17 @@ import NotFound from './pages/NotFound'
 function App() { 
   return ( 
     <HashRouter>
+      <ScrollToTop />
       <Navbar /> 
       <main className="main-content">
         <Routes> 
           <Route path="/" element={<Home />} /> 
           <Route path="/shop" element={<Shop />} /> 
+          <Route path="/category/:categoryId" element={<CategoryPage />} />
           <Route path="/about" element={<About />} /> 
           <Route path="/contact" element={<Contact />} /> 
           <Route path="/cart" element={<Cart />} /> 
+          <Route path="*" element={<NotFound />} />
         </Routes>
       </main> 
       <Footer /> 
@@ -1575,6 +1780,7 @@ export default ProductCard
 
 ===== src/components/ScrollToTop.jsx =====
 
+// src/components/ScrollToTop.jsx
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
@@ -1592,13 +1798,16 @@ export default ScrollToTop
 
 ===== src/data/products.js =====
 
+// src/data/products.js
 export const products = [
+  // Clothing
   { 
     id: 1, 
     name: "Soft Beige Abaya", 
     price: 349, 
     fabric: "Premium Crepe", 
-    color: "#d4c4b5", 
+    category: "clothing",
+    isNew: true,
     image: `${import.meta.env.BASE_URL}img/a.jpeg` 
   },
   { 
@@ -1606,7 +1815,8 @@ export const products = [
     name: "Dusty Rose Kimono", 
     price: 399, 
     fabric: "Luxury Chiffon", 
-    color: "#d4a5a5", 
+    category: "clothing",
+    isNew: false,
     image: `${import.meta.env.BASE_URL}img/b.jpeg` 
   },
   { 
@@ -1614,10 +1824,309 @@ export const products = [
     name: "Olive Elegance Set", 
     price: 449, 
     fabric: "Soft Linen Blend", 
-    color: "#a8b5a0", 
+    category: "clothing",
+    isNew: true,
     image: `${import.meta.env.BASE_URL}img/c.jpeg` 
   },
+  { 
+    id: 4, 
+    name: "Cream Pearl Abaya", 
+    price: 379, 
+    fabric: "Silk Touch Crepe", 
+    category: "clothing",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/e.jpeg` 
+  },
+  { 
+    id: 5, 
+    name: "Mocha Dream Dress", 
+    price: 329, 
+    fabric: "Flowy Georgette", 
+    category: "clothing",
+    isNew: false,
+    image: `${import.meta.env.BASE_URL}img/f.jpeg` 
+  },
+  { 
+    id: 6, 
+    name: "Blush Pink Set", 
+    price: 419, 
+    fabric: "Premium Medina Silk", 
+    category: "clothing",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/i.jpeg` 
+  },
   
+  
+  // Shoes
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos1.jpeg` 
+  },
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos2.jpeg` 
+  },
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos3.jpeg` 
+  },
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos4.jpeg` 
+  },
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos5.jpeg` 
+  },
+  { 
+    id: 7, 
+    name: "Elegant Flats", 
+    price: 199, 
+    fabric: "Faux Leather", 
+    category: "shoes",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/shos6.jpeg` 
+  },
+  
+  // Accessories
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc1.jpeg` 
+  },
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc2.jpeg` 
+  },
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc3.jpeg` 
+  },
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc4.jpeg` 
+  },
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc5.jpeg` 
+  },
+  { 
+    id: 10, 
+    name: "Pearl Hijab Pin Set", 
+    price: 49, 
+    fabric: "Silver + Pearl", 
+    category: "accessories",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/acc6.jpeg` 
+  },
+  
+  // Bags
+  { 
+    id: 16, 
+    name: "Elegant Shoulder Bag", 
+    price: 249, 
+    fabric: "Faux Leather", 
+    category: "bags",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/bag1.jpeg` 
+  },
+   { 
+    id: 16, 
+    name: "Elegant Shoulder Bag", 
+    price: 249, 
+    fabric: "Faux Leather", 
+    category: "bags",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/bag2.jpeg` 
+  },
+   { 
+    id: 16, 
+    name: "Elegant Shoulder Bag", 
+    price: 249, 
+    fabric: "Faux Leather", 
+    category: "bags",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/bag3.jpeg` 
+  },
+   { 
+    id: 16, 
+    name: "Elegant Shoulder Bag", 
+    price: 249, 
+    fabric: "Faux Leather", 
+    category: "bags",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/bag4.jpeg` 
+  },
+   { 
+    id: 16, 
+    name: "Elegant Shoulder Bag", 
+    price: 249, 
+    fabric: "Faux Leather", 
+    category: "bags",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/bag5.jpeg` 
+  },
+  
+  // Hijab
+  { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab1.jpeg` 
+  },
+   { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab2.jpeg` 
+  },
+   { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab3.jpeg` 
+  },
+   { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab4.jpeg` 
+  },
+   { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab5.jpeg` 
+  },
+   { 
+    id: 21, 
+    name: "Luxury Chiffon Hijab", 
+    price: 79, 
+    fabric: "Chiffon", 
+    category: "hijab",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/hijab6.jpeg` 
+  },
+  //makeup
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak1.jpeg` 
+  },
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak2.jpeg` 
+  },
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak3.jpeg` 
+  },
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak4.jpeg` 
+  },
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak5.jpeg` 
+  },
+    { 
+    id: 22, 
+    name: "Matte Liquid Lipstick", 
+    price: 89, 
+    fabric: "Liquid Lipstick", 
+    category: "makeup",
+    isNew: true,
+    image: `${import.meta.env.BASE_URL}img/mak6.jpeg` 
+  },
+
 ]
 
 ===== src/index.css =====
@@ -1908,7 +2417,9 @@ function Cart() {
                 <div className="cart-item-details">
                   <h4 className="cart-item-name">{item.name}</h4>
                   <p className="cart-item-price">{item.price} MAD</p>
-                  <p className="cart-item-size">Size: {item.size}</p>
+                  <p className="cart-item-size">
+                    {item.size === 'One Size' ? 'One Size' : `Size: ${item.size}`}
+                  </p>
                   <div className="cart-item-quantity">
                     <button onClick={() => updateQuantity(item.id, item.size, -1)} className="quantity-btn">−</button>
                     <span className="quantity-number">{item.quantity}</span>
@@ -1974,6 +2485,247 @@ function Cart() {
 }
 
 export default Cart
+
+===== src/pages/CategoryPage.jsx =====
+
+// src/pages/CategoryPage.jsx
+import React, { useState, useEffect } from 'react'
+import { useParams, useNavigate } from 'react-router-dom'
+import { products } from '../data/products'
+
+function CategoryPage() {
+  const { categoryId } = useParams()
+  const navigate = useNavigate()
+  const [cart, setCart] = useState([])
+  const [selectedSize, setSelectedSize] = useState({})
+  const [categoryProducts, setCategoryProducts] = useState([])
+  const [categoryInfo, setCategoryInfo] = useState({})
+
+  const categories = {
+    'clothing': { name: 'Clothing', arabicName: 'Clothing' },
+    'shoes': { name: 'Shoes', arabicName: 'Shoes' },
+    'accessories': { name: 'Accessories', arabicName: 'Accessories' },
+    'bags': { name: 'Bags', arabicName: 'Bags' },
+    'hijab': { name: 'Hijab', arabicName: 'Hijab' },
+    'caps': { name: 'Hijab Caps', arabicName: 'Hijab Caps' },
+    'makeup': { name: 'Makeup', arabicName: 'Makeup' }
+  }
+
+  // Categories that DON'T need size selection
+  const categoriesWithoutSize = ['accessories', 'makeup', 'caps', 'bags']
+  
+  // Hijab colors (available colors)
+  const hijabColors = [
+    { code: '#d4c4b5', name: 'Beige' },
+    { code: '#fda4af', name: 'Rose' },
+    { code: '#a8b5a0', name: 'Olive' },
+    { code: '#e8d5c4', name: 'Cream' },
+    { code: '#c9b6a6', name: 'Mocha' },
+    { code: '#e8c4c4', name: 'Blush Pink' },
+    { code: '#292524', name: 'Black' },
+    { code: '#ffffff', name: 'White' },
+    { code: '#78716b', name: 'Grey' },
+    { code: '#d4a5a5', name: 'Dusty Rose' }
+  ]
+
+  useEffect(() => {
+    const savedCart = localStorage.getItem('cart')
+    if (savedCart) {
+      setCart(JSON.parse(savedCart))
+    }
+  }, [])
+
+  useEffect(() => {
+    const filtered = products.filter(p => p.category === categoryId)
+    setCategoryProducts(filtered)
+    setCategoryInfo(categories[categoryId] || { name: categoryId, icon: '📦', arabicName: categoryId })
+    window.scrollTo(0, 0)
+  }, [categoryId])
+
+  const addToCart = (product) => {
+    let size = selectedSize[product.id]
+    
+    // If category doesn't need size, set size to 'One Size'
+    if (categoriesWithoutSize.includes(product.category)) {
+      size = 'One Size'
+    }
+    // For Hijab: size is the color name
+    else if (product.category === 'hijab') {
+      size = size || 'Beige'  // Default color
+    }
+    // For shoes
+    else if (product.category === 'shoes') {
+      size = size || '39'
+    }
+    // For clothing
+    else {
+      size = size || 'M'
+    }
+    
+    const existingItem = cart.find(item => item.id === product.id && item.size === size)
+    
+    let newCart
+    if (existingItem) {
+      newCart = cart.map(item =>
+        item.id === product.id && item.size === size
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      )
+    } else {
+      newCart = [...cart, { 
+        ...product, 
+        size, 
+        quantity: 1 
+      }]
+    }
+    
+    setCart(newCart)
+    localStorage.setItem('cart', JSON.stringify(newCart))
+    window.dispatchEvent(new Event('cartUpdated'))
+    showNotification('✓ Added to cart!')
+  }
+
+  const showNotification = (message) => {
+    const notification = document.createElement('div')
+    notification.className = 'notification'
+    notification.textContent = message
+    document.body.appendChild(notification)
+    
+    setTimeout(() => notification.classList.add('show'), 100)
+    setTimeout(() => {
+      notification.classList.remove('show')
+      setTimeout(() => notification.remove(), 300)
+    }, 2000)
+  }
+
+  // Function to render the correct size selector based on category
+  const renderSizeSelector = (product) => {
+    // Categories WITHOUT size (no selector at all)
+    if (categoriesWithoutSize.includes(product.category)) {
+      return null
+    }
+    
+    // Hijab: Color selector with color swatches
+    if (product.category === 'hijab') {
+      return (
+        <div className="color-selector">
+          <label className="color-label">Color:</label>
+          <div className="color-options">
+            {hijabColors.map((color) => (
+              <button
+                key={color.name}
+                type="button"
+                className={`color-option ${selectedSize[product.id] === color.name ? 'active' : ''}`}
+                style={{ backgroundColor: color.code }}
+                onClick={() => setSelectedSize({ ...selectedSize, [product.id]: color.name })}
+                title={color.name}
+              />
+            ))}
+          </div>
+          <select 
+            id={`size-${product.id}`}
+            onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
+            className="size-select"
+            defaultValue="Beige"
+          >
+            {hijabColors.map((color) => (
+              <option key={color.name} value={color.name}>
+                {color.name}
+              </option>
+            ))}
+          </select>
+        </div>
+      )
+    }
+    
+    // Shoes: 38, 39, 40, 41
+    if (product.category === 'shoes') {
+      return (
+        <select 
+          id={`size-${product.id}`}
+          onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
+          className="size-select"
+          defaultValue="39"
+        >
+          <option value="38">38</option>
+          <option value="39">39</option>
+          <option value="40">40</option>
+          <option value="41">41</option>
+        </select>
+      )
+    }
+    
+    // Clothing: S, M, L
+    return (
+      <select 
+        id={`size-${product.id}`}
+        onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
+        className="size-select"
+        defaultValue="M"
+      >
+        <option value="S">S</option>
+        <option value="M">M</option>
+        <option value="L">L</option>
+      </select>
+    )
+  }
+
+  return (
+    <div className="page">
+      <div className="container">
+        <button onClick={() => navigate('/shop')} className="back-to-shop">
+          ← Back to Shop
+        </button>
+
+        <div className="section-header">
+          <p className="section-label">{categoryInfo.icon} {categoryInfo.name}</p>
+          <h2 className="section-title">{categoryInfo.arabicName}</h2>
+          <div className="section-divider"></div>
+        </div>
+
+        <div className="products-grid">
+          {categoryProducts.length === 0 ? (
+            <div className="no-products">
+              <p>😊 No products in this category yet</p>
+              <button onClick={() => navigate('/shop')} className="btn-primary">
+                Back to Shop
+              </button>
+            </div>
+          ) : (
+            categoryProducts.map((product, index) => (
+              <div key={product.id} className="product-card slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div className="product-image">
+                  <img src={product.image} alt={product.name} loading="lazy" />
+                  <span className="product-price">{product.price} MAD</span>
+                  {product.isNew && (
+                    <span className="product-badge new">✨ New</span>
+                  )}
+                </div>
+                <div className="product-info">
+                  <h3 className="product-name">{product.name}</h3>
+                  <div className="product-specs">
+                    <p className="product-spec">• {product.fabric}</p>
+                  </div>
+                  <div className="product-actions">
+                    {renderSizeSelector(product)}
+                    <button 
+                      onClick={() => addToCart(product)} 
+                      className="btn-primary full-width"
+                    >
+                      🛒 Add to Cart
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default CategoryPage
 
 ===== src/pages/Contact.jsx =====
 
@@ -2109,110 +2861,76 @@ export default NotFound
 
 ===== src/pages/Shop.jsx =====
 
-import React, { useState, useEffect } from 'react'
-import { products } from '../data/products'
-
-
+// src/pages/Shop.jsx
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Shop() {
-  const [cart, setCart] = useState([])
-  const [selectedSize, setSelectedSize] = useState({})
+  const navigate = useNavigate()
 
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart')
-    if (savedCart) {
-      setCart(JSON.parse(savedCart))
+  // Categories with images
+  const categories = [
+    { 
+      id: 'clothing', 
+      name: 'Clothing',  
+      image: `${import.meta.env.BASE_URL}img/1.jpeg`,
+      description: 'Modern & modest fashion',
+    },
+    { 
+      id: 'shoes', 
+      name: 'Shoes', 
+      image: `${import.meta.env.BASE_URL}img/2.jpg`,
+      description: 'Elegant & comfortable footwear',
+    },
+    { 
+      id: 'accessories', 
+      name: 'Accessories', 
+      image: `${import.meta.env.BASE_URL}img/1.jpg`,
+      description: 'Premium accessories',
+    },
+    { 
+      id: 'bags', 
+      name: 'Bags', 
+      image: `${import.meta.env.BASE_URL}img/5.jpg`,
+      description: 'Stylish bags for every occasion',
+    },
+    { 
+      id: 'hijab', 
+      name: 'Hijab',
+      image: `${import.meta.env.BASE_URL}img/3.jpg`,
+      description: 'Luxury fabrics & soft colors',
+    },
+    { 
+      id: 'makeup', 
+      name: 'Makeup',  
+      image: `${import.meta.env.BASE_URL}img/6.jpg`,
+      description: 'Premium beauty products',
     }
-  }, [])
-
-  // Add to cart function
-  const addToCart = (product) => {
-    const size = selectedSize[product.id] || 'M'
-    const existingItem = cart.find(item => item.id === product.id && item.size === size)
-    
-    let newCart
-    if (existingItem) {
-      newCart = cart.map(item =>
-        item.id === product.id && item.size === size
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    } else {
-      newCart = [...cart, { 
-        ...product, 
-        size, 
-        quantity: 1 
-      }]
-    }
-    
-    setCart(newCart)
-    localStorage.setItem('cart', JSON.stringify(newCart))
-    
-    // Dispatch event to update cart count in Navbar
-    window.dispatchEvent(new Event('cartUpdated'))
-    
-    // Show notification
-    showNotification('✓ Added to cart!')
-  }
-
-  // Show notification
-  const showNotification = (message) => {
-    const notification = document.createElement('div')
-    notification.className = 'notification'
-    notification.textContent = message
-    document.body.appendChild(notification)
-    
-    setTimeout(() => {
-      notification.classList.add('show')
-    }, 100)
-    
-    setTimeout(() => {
-      notification.classList.remove('show')
-      setTimeout(() => {
-        notification.remove()
-      }, 300)
-    }, 2000)
-  }
+  ]
 
   return (
     <div className="page">
       <div className="container">
         <div className="section-header">
-          <p className="section-label">Curated Selection</p>
-          <h2 className="section-title">Our Collection</h2>
+          <p className="section-label">Discover Our Collections</p>
+          <h2 className="section-title">Categories</h2>
           <div className="section-divider"></div>
         </div>
-        <div className="products-grid">
-          {products.map((product, index) => (
-            <div key={product.id} className="product-card slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="product-image">
-                <img src={product.image} alt={product.name} loading="lazy" />
-                <span className="product-price">{product.price} MAD</span>
-              </div>
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <div className="product-specs">
-                  <p className="product-spec">• Fabric: {product.fabric}</p>
-                  <p className="product-spec">• Loose & Elegant Fit</p>
-                </div>
-                <div className="product-actions">
-                  <select 
-                    id={`size-${product.id}`}
-                    onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
-                    className="size-select"
-                    defaultValue="M"
-                  >
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                  </select>
-                  <button 
-                    onClick={() => addToCart(product)} 
-                    className="btn-primary full-width"
-                  >
-                    🛒 Add to Cart
-                  </button>
+
+        <div className="categories-grid">
+          {categories.map((category, index) => (
+            <div 
+              key={category.id} 
+              className="category-card slide-up" 
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => navigate(`/category/${category.id}`)}
+            >
+              <div className="category-image">
+                <img src={category.image} alt={category.name} />
+                <div className="category-overlay">
+                  <span className="category-icon">{category.icon}</span>
+                  <h3 className="category-name">{category.name}</h3>
+                  <p className="category-description">{category.description}</p>
                 </div>
               </div>
             </div>

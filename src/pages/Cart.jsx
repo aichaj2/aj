@@ -145,7 +145,9 @@ function Cart() {
                 <div className="cart-item-details">
                   <h4 className="cart-item-name">{item.name}</h4>
                   <p className="cart-item-price">{item.price} MAD</p>
-                  <p className="cart-item-size">Size: {item.size}</p>
+                  <p className="cart-item-size">
+                    {item.size === 'One Size' ? 'One Size' : `Size: ${item.size}`}
+                  </p>
                   <div className="cart-item-quantity">
                     <button onClick={() => updateQuantity(item.id, item.size, -1)} className="quantity-btn">−</button>
                     <span className="quantity-number">{item.quantity}</span>

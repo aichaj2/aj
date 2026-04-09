@@ -1,107 +1,73 @@
-import React, { useState, useEffect } from 'react'
-import { products } from '../data/products'
-
-
+// src/pages/Shop.jsx
+import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Shop() {
-  const [cart, setCart] = useState([])
-  const [selectedSize, setSelectedSize] = useState({})
+  const navigate = useNavigate()
 
-  // Load cart from localStorage on mount
-  useEffect(() => {
-    const savedCart = localStorage.getItem('cart')
-    if (savedCart) {
-      setCart(JSON.parse(savedCart))
+  // Categories with images
+  const categories = [
+    { 
+      id: 'clothing', 
+      name: 'Clothing',  
+      image: `${import.meta.env.BASE_URL}img/1.jpeg`,
+      description: 'Modern & modest fashion',
+    },
+    { 
+      id: 'shoes', 
+      name: 'Shoes', 
+      image: `${import.meta.env.BASE_URL}img/2.jpg`,
+      description: 'Elegant & comfortable footwear',
+    },
+    { 
+      id: 'accessories', 
+      name: 'Accessories', 
+      image: `${import.meta.env.BASE_URL}img/1.jpg`,
+      description: 'Premium accessories',
+    },
+    { 
+      id: 'bags', 
+      name: 'Bags', 
+      image: `${import.meta.env.BASE_URL}img/5.jpg`,
+      description: 'Stylish bags for every occasion',
+    },
+    { 
+      id: 'hijab', 
+      name: 'Hijab',
+      image: `${import.meta.env.BASE_URL}img/3.jpg`,
+      description: 'Luxury fabrics & soft colors',
+    },
+    { 
+      id: 'makeup', 
+      name: 'Makeup',  
+      image: `${import.meta.env.BASE_URL}img/6.jpg`,
+      description: 'Premium beauty products',
     }
-  }, [])
-
-  // Add to cart function
-  const addToCart = (product) => {
-    const size = selectedSize[product.id] || 'M'
-    const existingItem = cart.find(item => item.id === product.id && item.size === size)
-    
-    let newCart
-    if (existingItem) {
-      newCart = cart.map(item =>
-        item.id === product.id && item.size === size
-          ? { ...item, quantity: item.quantity + 1 }
-          : item
-      )
-    } else {
-      newCart = [...cart, { 
-        ...product, 
-        size, 
-        quantity: 1 
-      }]
-    }
-    
-    setCart(newCart)
-    localStorage.setItem('cart', JSON.stringify(newCart))
-    
-    // Dispatch event to update cart count in Navbar
-    window.dispatchEvent(new Event('cartUpdated'))
-    
-    // Show notification
-    showNotification('✓ Added to cart!')
-  }
-
-  // Show notification
-  const showNotification = (message) => {
-    const notification = document.createElement('div')
-    notification.className = 'notification'
-    notification.textContent = message
-    document.body.appendChild(notification)
-    
-    setTimeout(() => {
-      notification.classList.add('show')
-    }, 100)
-    
-    setTimeout(() => {
-      notification.classList.remove('show')
-      setTimeout(() => {
-        notification.remove()
-      }, 300)
-    }, 2000)
-  }
+  ]
 
   return (
     <div className="page">
       <div className="container">
         <div className="section-header">
-          <p className="section-label">Curated Selection</p>
-          <h2 className="section-title">Our Collection</h2>
+          <p className="section-label">Discover Our Collections</p>
+          <h2 className="section-title">Categories</h2>
           <div className="section-divider"></div>
         </div>
-        <div className="products-grid">
-          {products.map((product, index) => (
-            <div key={product.id} className="product-card slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-              <div className="product-image">
-                <img src={product.image} alt={product.name} loading="lazy" />
-                <span className="product-price">{product.price} MAD</span>
-              </div>
-              <div className="product-info">
-                <h3 className="product-name">{product.name}</h3>
-                <div className="product-specs">
-                  <p className="product-spec">• Fabric: {product.fabric}</p>
-                  <p className="product-spec">• Loose & Elegant Fit</p>
-                </div>
-                <div className="product-actions">
-                  <select 
-                    id={`size-${product.id}`}
-                    onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
-                    className="size-select"
-                    defaultValue="M"
-                  >
-                    <option value="S">S</option>
-                    <option value="M">M</option>
-                    <option value="L">L</option>
-                  </select>
-                  <button 
-                    onClick={() => addToCart(product)} 
-                    className="btn-primary full-width"
-                  >
-                    🛒 Add to Cart
-                  </button>
+
+        <div className="categories-grid">
+          {categories.map((category, index) => (
+            <div 
+              key={category.id} 
+              className="category-card slide-up" 
+              style={{ animationDelay: `${index * 0.1}s` }}
+              onClick={() => navigate(`/category/${category.id}`)}
+            >
+              <div className="category-image">
+                <img src={category.image} alt={category.name} />
+                <div className="category-overlay">
+                  <span className="category-icon">{category.icon}</span>
+                  <h3 className="category-name">{category.name}</h3>
+                  <p className="category-description">{category.description}</p>
                 </div>
               </div>
             </div>
