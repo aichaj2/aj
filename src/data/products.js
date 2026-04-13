@@ -20,7 +20,6 @@ export const products = [
     price: 399, 
     fabric: "Luxury Chiffon", 
     category: "clothing",
-    isNew: false,
     colors: [
     { name: "b1", code: "#111b648a", image:`${import.meta.env.BASE_URL}img/ab1.jpeg`},
     { name: "b2", code: "#ceb396", image: `${import.meta.env.BASE_URL}img/ab2.jpeg`}
@@ -32,7 +31,6 @@ export const products = [
     price: 449, 
     fabric: "Soft Linen Blend", 
     category: "clothing",
-    isNew: true,
     colors: [
     { name: "c1", code: "#2d141cef", image:`${import.meta.env.BASE_URL}img/ac1.jpeg`},
     { name: "c2", code: "#090909", image: `${import.meta.env.BASE_URL}img/ac2.jpeg`},
@@ -45,7 +43,6 @@ export const products = [
     price: 379, 
     fabric: "Silk Touch Crepe", 
     category: "clothing",
-    isNew: true,
     colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ad1.jpeg`},
     { name: "d2", code: "#21145b", image: `${import.meta.env.BASE_URL}img/ad2.jpeg`},
@@ -58,7 +55,6 @@ export const products = [
     price: 329, 
     fabric: "Flowy Georgette", 
     category: "clothing",
-    isNew: false,
     colors: [
     { name: "e1", code: "#052e19f0", image:`${import.meta.env.BASE_URL}img/ae1.jpeg`},
     { name: "e2", code: "#935378", image: `${import.meta.env.BASE_URL}img/ae2.jpeg`},
@@ -71,7 +67,6 @@ export const products = [
     price: 419, 
     fabric: "Premium Medina Silk", 
     category: "clothing",
-    isNew: true,
     colors: [
     { name: "f1", code: "#6e182e", image:`${import.meta.env.BASE_URL}img/af1.jpeg`},
     { name: "f2", code: "#271907", image: `${import.meta.env.BASE_URL}img/af2.jpeg`},
@@ -82,12 +77,11 @@ export const products = [
   
   // Shoes
   { 
-    id: 1, 
+    id: 7, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
     colors: [
       { name: "ba2", code: "#90ba7e", image: `${import.meta.env.BASE_URL}img/ba2.jpeg`},
       { name: "ba3", code: "#9e7e5e", image: `${import.meta.env.BASE_URL}img/ba3.jpeg`},
@@ -95,12 +89,11 @@ export const products = [
     ]
   },
   { 
-    id: 2, 
+    id: 8, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
     colors: [
       { name: "bb1", code: "#3c2308", image:`${import.meta.env.BASE_URL}img/bb1.jpeg`},
       { name: "bb2", code: "#c8ab9a", image: `${import.meta.env.BASE_URL}img/bb2.jpeg`},
@@ -108,12 +101,11 @@ export const products = [
     ]
   },
   { 
-    id: 3, 
+    id: 9, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
      colors: [
     { name: "d1", code: "#080808", image:`${import.meta.env.BASE_URL}img/bc1.jpeg`},
     { name: "d2", code: "#f2f2f2", image: `${import.meta.env.BASE_URL}img/bc2.jpeg`},
@@ -121,13 +113,11 @@ export const products = [
     ]
   },
   { 
-    id: 4, 
+    id: 10, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-     isNew: true,
      colors: [
     { name: "d1", code: "#e693d3", image:`${import.meta.env.BASE_URL}img/bd1.jpeg`},
     { name: "d2", code: "#c6b170", image: `${import.meta.env.BASE_URL}img/bd2.jpeg`},
@@ -136,26 +126,22 @@ export const products = [
     ]
   },
   { 
-    id: 5, 
+    id: 11, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-     isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/be1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/be2.jpeg`}
     ]
   },
   { 
-    id: 6, 
+    id: 12, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-     isNew: true,
      colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/bf1.jpeg`},
     { name: "d2", code: "#956543", image: `${import.meta.env.BASE_URL}img/bf2.jpeg`},
@@ -165,11 +151,10 @@ export const products = [
   
   // Accessories
   { 
-    id: 1, 
+    id: 13, 
     name: "Pearl Hijab Pin Set", 
     price: 49,  
     category: "accessories",
-    isNew: true,
     colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca1.jpeg`},
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca2.jpeg`},
@@ -180,11 +165,10 @@ export const products = [
     ]
   },
   { 
-    id: 2, 
+    id: 14, 
     name: "Pearl Hijab Pin Set", 
     price: 49,  
     category: "accessories",
-    isNew: true,
     colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb1.jpeg`},
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb2.jpeg`},
@@ -194,11 +178,10 @@ export const products = [
     ]
   },
   { 
-    id: 3, 
+    id: 15, 
     name: "Pearl Hijab Pin Set", 
     price: 49,  
     category: "accessories",
-    isNew: true,
     colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc1.jpeg`},
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc2.jpeg`},
@@ -208,11 +191,10 @@ export const products = [
     ]
   },
   { 
-    id: 4, 
+    id: 16, 
     name: "Pearl Hijab Pin Set", 
     price: 49,  
     category: "accessories",
-    isNew: true,
     colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd3.jpeg`},
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd2.jpeg`},
@@ -222,18 +204,17 @@ export const products = [
     ] 
   },
   { 
-    id: 5, 
+    id: 17, 
     name: "Pearl Hijab Pin Set", 
     price: 49,  
     category: "accessories",
-    isNew: true,
     colors: [
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ce1.jpeg`},
     { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ce2.jpeg`}
     ]
   },
   { 
-    id: 6, 
+    id: 18, 
     name: "Pearl Hijab Pin Set", 
     price: 49,
     category: "accessories",
@@ -248,12 +229,11 @@ export const products = [
   
   // Bags
   { 
-    id: 1, 
+    id: 19, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/da1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/da2.jpeg`},
@@ -262,12 +242,11 @@ export const products = [
     ]
   },
    { 
-    id: 2, 
+    id: 20, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/db1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/db2.jpeg`},
@@ -275,12 +254,11 @@ export const products = [
     ] 
   },
    { 
-    id: 3, 
+    id: 21, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/dc1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dc2.jpeg`},
@@ -289,12 +267,11 @@ export const products = [
     ] 
   },
    { 
-    id: 4, 
+    id: 22, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/dd1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dd2.jpeg`},
@@ -304,12 +281,11 @@ export const products = [
   ]
   },
    { 
-    id: 5, 
+    id: 23, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/de1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/de2.jpeg`},
@@ -319,12 +295,11 @@ export const products = [
   
   // Hijab
   { 
-    id: 1, 
+    id: 24, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ea1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea2.jpeg`},
@@ -342,12 +317,11 @@ export const products = [
   ]
   },
    { 
-    id: 2, 
+    id: 25, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/eb1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb2.jpeg`},
@@ -359,12 +333,11 @@ export const products = [
   ]
   },
    { 
-    id: 3, 
+    id: 26, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ec1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ec2.jpeg`},
@@ -374,12 +347,11 @@ export const products = [
   ] 
   },
    { 
-    id: 4, 
+    id: 27, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ed1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed2.jpeg`},
@@ -391,12 +363,11 @@ export const products = [
   ] 
   },
    { 
-    id: 5, 
+    id: 28, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ee1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ee2.jpeg`},
@@ -406,12 +377,11 @@ export const products = [
   ] 
   },
    { 
-    id: 6, 
+    id: 29, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ef1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ef2.jpeg`},
@@ -421,12 +391,11 @@ export const products = [
   },
   //makeup
     { 
-    id: 1, 
+    id: 30, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fa1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fa2.jpeg`},
@@ -435,12 +404,11 @@ export const products = [
   ]
   },
     { 
-    id: 2, 
+    id: 31, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fb1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fb2.jpeg`},
@@ -450,24 +418,22 @@ export const products = [
   ]
   },
     { 
-    id: 3, 
+    id: 32, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fc1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fc2.jpeg`}
   ] 
   },
     { 
-    id: 4, 
+    id: 33, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fd1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fd2.jpeg`},
@@ -476,24 +442,22 @@ export const products = [
   ]
   },
     { 
-    id: 5, 
+    id: 34, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fe1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fe2.jpeg`}
   ] 
   },
     { 
-    id: 6, 
+    id: 35, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
      colors: [
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ff1.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ff2.jpeg`},

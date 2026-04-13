@@ -112,6 +112,7 @@ function CategoryPage() {
         ...product,
         size,
         color,
+        image: product.colors?.[currentImage[product.id] || 0]?.image,
         quantity: 1 
       }]
     }
@@ -312,7 +313,7 @@ if (categoriesWithoutSize.includes(product.category)) {
   <h3 className="product-name">{product.name}</h3>
 
   {/* Accessories → show images here */}
-  {product.category === 'accessories' && renderSizeSelector(product)}
+  {renderSizeSelector(product)}
 
   {/* Other categories → show specs */}
   {product.category !== 'accessories' && product.fabric && (
@@ -322,7 +323,7 @@ if (categoriesWithoutSize.includes(product.category)) {
   )}
 
   <div className="product-actions">
-    {product.category !== 'accessories' && renderSizeSelector(product)}
+   
 
     <button 
       onClick={() => addToCart(product)} 

@@ -371,19 +371,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
-.product-image {
-  aspect-ratio: 3/4;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
 
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
 
 .product-card:hover .product-image img {
   transform: scale(1.05);
@@ -1510,6 +1498,84 @@
   }
 }
 
+
+.product-image button:first-child {
+  left: 10px;
+}
+
+.product-image button:last-child {
+  right: 10px;
+}
+.product-image {
+  width: 100%;
+  height: 320px;        /* نفس الحجم لكل الصور */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;  /* خلفية باش يبان الفراغ مزيان */
+  border-radius: 10px;
+  position: relative;
+}
+
+/* الصورة */
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  transform: scale(1.1); 
+}
+
+/* الأسهم */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* اليسار */
+.arrow.left {
+  left: 10px;
+}
+
+/* اليمين */
+.arrow.right {
+  right: 10px;
+}
+
+/* يظهر غير ملي hover */
+.product-image:hover .arrow {
+  opacity: 1;
+}
+.thumbnails {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.thumb.active {
+  opacity: 1;
+  border: 2px solid black;
+}
+
 ===== src/App.jsx =====
 
 // src/App.jsx
@@ -1740,44 +1806,6 @@ function Navbar() {
 
 export default Navbar
 
-===== src/components/ProductCard.jsx =====
-
-import React, { useState } from 'react'
-
-function ProductCard({ product, onAddToCart }) {
-  const [size, setSize] = useState('M')
-
-  return (
-    <div className="product-card">
-      <div className="product-image">
-        <img src={product.image} alt={product.name} />
-        <span className="product-price">{product.price} MAD</span>
-      </div>
-      <div className="product-info">
-        <h3 className="product-name">{product.name}</h3>
-        <p className="product-spec">Fabric: {product.fabric}</p>
-        <select 
-          value={size} 
-          onChange={(e) => setSize(e.target.value)}
-          className="size-select"
-        >
-          <option>S</option>
-          <option>M</option>
-          <option>L</option>
-        </select>
-        <button 
-          onClick={() => onAddToCart(product, size)}
-          className="btn-primary"
-        >
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  )
-}
-
-export default ProductCard
-
 ===== src/components/ScrollToTop.jsx =====
 
 // src/components/ScrollToTop.jsx
@@ -1807,8 +1835,12 @@ export const products = [
     price: 349, 
     fabric: "Premium Crepe", 
     category: "clothing",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/a.jpeg` 
+    
+    colors: [
+    { name: "a1", code: "#36a9a78a", image:`${import.meta.env.BASE_URL}img/a1.jpeg`},
+    { name: "a2", code: "#9d56be", image: `${import.meta.env.BASE_URL}img/a2.jpeg`},
+    { name: "a3", code: "#6e182e", image: `${import.meta.env.BASE_URL}img/a3.jpeg`}
+    ] 
   },
   { 
     id: 2, 
@@ -1816,8 +1848,10 @@ export const products = [
     price: 399, 
     fabric: "Luxury Chiffon", 
     category: "clothing",
-    isNew: false,
-    image: `${import.meta.env.BASE_URL}img/b.jpeg` 
+    colors: [
+    { name: "b1", code: "#111b648a", image:`${import.meta.env.BASE_URL}img/ab1.jpeg`},
+    { name: "b2", code: "#ceb396", image: `${import.meta.env.BASE_URL}img/ab2.jpeg`}
+    ]
   },
   { 
     id: 3, 
@@ -1825,8 +1859,11 @@ export const products = [
     price: 449, 
     fabric: "Soft Linen Blend", 
     category: "clothing",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/c.jpeg` 
+    colors: [
+    { name: "c1", code: "#2d141cef", image:`${import.meta.env.BASE_URL}img/ac1.jpeg`},
+    { name: "c2", code: "#090909", image: `${import.meta.env.BASE_URL}img/ac2.jpeg`},
+    { name: "c3", code: "#5e3811", image: `${import.meta.env.BASE_URL}img/ac3.jpeg`}
+    ]
   },
   { 
     id: 4, 
@@ -1834,8 +1871,11 @@ export const products = [
     price: 379, 
     fabric: "Silk Touch Crepe", 
     category: "clothing",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/e.jpeg` 
+    colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ad1.jpeg`},
+    { name: "d2", code: "#21145b", image: `${import.meta.env.BASE_URL}img/ad2.jpeg`},
+    { name: "d3", code: "#5e3811", image: `${import.meta.env.BASE_URL}img/ad3.jpeg`}
+    ]
   },
   { 
     id: 5, 
@@ -1843,8 +1883,11 @@ export const products = [
     price: 329, 
     fabric: "Flowy Georgette", 
     category: "clothing",
-    isNew: false,
-    image: `${import.meta.env.BASE_URL}img/f.jpeg` 
+    colors: [
+    { name: "e1", code: "#052e19f0", image:`${import.meta.env.BASE_URL}img/ae1.jpeg`},
+    { name: "e2", code: "#935378", image: `${import.meta.env.BASE_URL}img/ae2.jpeg`},
+    { name: "e3", code: "#5e3811", image: `${import.meta.env.BASE_URL}img/ae3.jpeg`}
+    ]
   },
   { 
     id: 6, 
@@ -1852,8 +1895,11 @@ export const products = [
     price: 419, 
     fabric: "Premium Medina Silk", 
     category: "clothing",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/i.jpeg` 
+    colors: [
+    { name: "f1", code: "#6e182e", image:`${import.meta.env.BASE_URL}img/af1.jpeg`},
+    { name: "f2", code: "#271907", image: `${import.meta.env.BASE_URL}img/af2.jpeg`},
+    { name: "f3", code: "#08ae13a3", image: `${import.meta.env.BASE_URL}img/af3.jpeg`}
+    ]
   },
   
   
@@ -1864,267 +1910,387 @@ export const products = [
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos1.jpeg` 
+    colors: [
+      { name: "ba2", code: "#90ba7e", image: `${import.meta.env.BASE_URL}img/ba2.jpeg`},
+      { name: "ba3", code: "#9e7e5e", image: `${import.meta.env.BASE_URL}img/ba3.jpeg`},
+      { name: "ba4", code: "#3b6199", image: `${import.meta.env.BASE_URL}img/ba4.jpeg`}
+    ]
   },
   { 
-    id: 7, 
+    id: 8, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos2.jpeg` 
+    colors: [
+      { name: "bb1", code: "#3c2308", image:`${import.meta.env.BASE_URL}img/bb1.jpeg`},
+      { name: "bb2", code: "#c8ab9a", image: `${import.meta.env.BASE_URL}img/bb2.jpeg`},
+      { name: "bb3", code: "#070707", image: `${import.meta.env.BASE_URL}img/bb3.jpeg`}
+    ]
   },
   { 
-    id: 7, 
+    id: 9, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos3.jpeg` 
+     colors: [
+    { name: "d1", code: "#080808", image:`${import.meta.env.BASE_URL}img/bc1.jpeg`},
+    { name: "d2", code: "#f2f2f2", image: `${import.meta.env.BASE_URL}img/bc2.jpeg`},
+    { name: "d3", code: "#7e6144", image: `${import.meta.env.BASE_URL}img/bc3.jpeg`}
+    ]
   },
   { 
-    id: 7, 
+    id: 10, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos4.jpeg` 
+     colors: [
+    { name: "d1", code: "#e693d3", image:`${import.meta.env.BASE_URL}img/bd1.jpeg`},
+    { name: "d2", code: "#c6b170", image: `${import.meta.env.BASE_URL}img/bd2.jpeg`},
+    { name: "d3", code: "#78a944", image: `${import.meta.env.BASE_URL}img/bd3.jpeg`},
+    { name: "d3", code: "#dbcdbf", image: `${import.meta.env.BASE_URL}img/bd4.jpeg`}
+    ]
   },
   { 
-    id: 7, 
+    id: 11, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos5.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/be1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/be2.jpeg`}
+    ]
   },
   { 
-    id: 7, 
+    id: 12, 
     name: "Elegant Flats", 
     price: 199, 
     fabric: "Faux Leather", 
     category: "shoes",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/shos6.jpeg` 
+     colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/bf1.jpeg`},
+    { name: "d2", code: "#956543", image: `${import.meta.env.BASE_URL}img/bf2.jpeg`},
+    { name: "d3", code: "#1372ad", image: `${import.meta.env.BASE_URL}img/bf3.jpeg`}
+    ]
   },
   
   // Accessories
   { 
-    id: 10, 
+    id: 13, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,  
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc1.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca2.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca3.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca4.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca5.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ca6.jpeg`}
+    ]
   },
   { 
-    id: 10, 
+    id: 14, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,  
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc2.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb2.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb3.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb4.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cb5.jpeg`}
+    ]
   },
   { 
-    id: 10, 
+    id: 15, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,  
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc3.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc2.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc3.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc4.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cc5.jpeg`}
+    ]
   },
   { 
-    id: 10, 
+    id: 16, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,  
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc4.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd3.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd2.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd4.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cd5.jpeg`}
+    ] 
   },
   { 
-    id: 10, 
+    id: 17, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,  
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc5.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ce1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/ce2.jpeg`}
+    ]
   },
   { 
-    id: 10, 
+    id: 18, 
     name: "Pearl Hijab Pin Set", 
-    price: 49, 
-    fabric: "Silver + Pearl", 
+    price: 49,
     category: "accessories",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/acc6.jpeg` 
+    colors: [
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cf1.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cf2.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cf3.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cf4.jpeg`},
+    { name: "d1", code: "#faf7f4", image:`${import.meta.env.BASE_URL}img/cf5.jpeg`}
+    ] 
   },
   
   // Bags
   { 
-    id: 16, 
+    id: 19, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/bag1.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/da1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/da2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/da3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/da4.jpeg`}
+    ]
   },
    { 
-    id: 16, 
+    id: 20, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/bag2.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/db1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/db2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/db3.jpeg`}
+    ] 
   },
    { 
-    id: 16, 
+    id: 21, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/bag3.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/dc1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dc2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dc3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dc4.jpeg`}
+    ] 
   },
    { 
-    id: 16, 
+    id: 22, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/bag4.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/dd1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dd2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dd3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dd4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/dd5.jpeg`}
+  ]
   },
    { 
-    id: 16, 
+    id: 23, 
     name: "Elegant Shoulder Bag", 
     price: 249, 
     fabric: "Faux Leather", 
     category: "bags",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/bag5.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/de1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/de2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/de3.jpeg`}
+    ]
   },
   
   // Hijab
   { 
-    id: 21, 
+    id: 24, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab1.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ea1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea5.jpeg`},
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ea6.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea7.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea8.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea9.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea10.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea11.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea12.jpeg`}
+  
+  ]
   },
    { 
-    id: 21, 
+    id: 25, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab2.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/eb1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb5.jpeg`},
+     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb6.jpeg`},
+      { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/eb7.jpeg`}
+  ]
   },
    { 
-    id: 21, 
+    id: 26, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab3.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ec1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ec2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ec3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ec4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ec5.jpeg`}
+  ] 
   },
    { 
-    id: 21, 
+    id: 27, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab4.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ed1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed5.jpeg`},
+     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed6.jpeg`},
+      { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ed7.jpeg`},
+  ] 
   },
    { 
-    id: 21, 
+    id: 28, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab5.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ee1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ee2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ee3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ee4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ee5.jpeg`}
+  ] 
   },
    { 
-    id: 21, 
+    id: 29, 
     name: "Luxury Chiffon Hijab", 
     price: 79, 
     fabric: "Chiffon", 
     category: "hijab",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/hijab6.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ef1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ef2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ef3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ef4.jpeg`}
+  ]
   },
   //makeup
     { 
-    id: 22, 
+    id: 30, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak1.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fa1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fa2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fa3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fa4.jpeg`}
+  ]
   },
     { 
-    id: 22, 
+    id: 31, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak2.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fb1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fb2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fb3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fb4.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fb5.jpeg`}
+  ]
   },
     { 
-    id: 22, 
+    id: 32, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak3.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fc1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fc2.jpeg`}
+  ] 
   },
     { 
-    id: 22, 
+    id: 33, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak4.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fd1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fd2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fd3.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fd4.jpeg`}
+  ]
   },
     { 
-    id: 22, 
+    id: 34, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak5.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/fe1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/fe2.jpeg`}
+  ] 
   },
     { 
-    id: 22, 
+    id: 35, 
     name: "Matte Liquid Lipstick", 
     price: 89, 
     fabric: "Liquid Lipstick", 
     category: "makeup",
-    isNew: true,
-    image: `${import.meta.env.BASE_URL}img/mak6.jpeg` 
+     colors: [
+    { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ff1.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ff2.jpeg`},
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ff3.jpeg`}
+  ]
   },
 
 ]
@@ -2489,17 +2655,21 @@ export default Cart
 ===== src/pages/CategoryPage.jsx =====
 
 // src/pages/CategoryPage.jsx
+
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
 import { products } from '../data/products'
 
 function CategoryPage() {
+
   const { categoryId } = useParams()
   const navigate = useNavigate()
+
   const [cart, setCart] = useState([])
   const [selectedSize, setSelectedSize] = useState({})
   const [categoryProducts, setCategoryProducts] = useState([])
   const [categoryInfo, setCategoryInfo] = useState({})
+  const [currentImage, setCurrentImage] = useState({})
 
   const categories = {
     'clothing': { name: 'Clothing', arabicName: 'Clothing' },
@@ -2512,9 +2682,9 @@ function CategoryPage() {
   }
 
   // Categories that DON'T need size selection
-  const categoriesWithoutSize = ['accessories', 'makeup', 'caps', 'bags']
-  
-  // Hijab colors (available colors)
+  const categoriesWithoutSize = ['accessories', 'makeup', 'caps', 'bags', 'hijab']
+
+  // Hijab colors
   const hijabColors = [
     { code: '#d4c4b5', name: 'Beige' },
     { code: '#fda4af', name: 'Rose' },
@@ -2528,6 +2698,24 @@ function CategoryPage() {
     { code: '#d4a5a5', name: 'Dusty Rose' }
   ]
 
+  const nextImage = (id, colors) => {
+    setCurrentImage(prev => ({
+      ...prev,
+      [id]: prev[id] === colors.length - 1
+        ? 0
+        : (prev[id] || 0) + 1
+    }))
+  }
+
+  const prevImage = (id, images) => {
+    setCurrentImage(prev => ({
+      ...prev,
+      [id]: prev[id] === 0
+        ? images.length - 1
+        : (prev[id] || 0) - 1
+    }))
+  }
+
   useEffect(() => {
     const savedCart = localStorage.getItem('cart')
     if (savedCart) {
@@ -2538,33 +2726,37 @@ function CategoryPage() {
   useEffect(() => {
     const filtered = products.filter(p => p.category === categoryId)
     setCategoryProducts(filtered)
-    setCategoryInfo(categories[categoryId] || { name: categoryId, icon: '📦', arabicName: categoryId })
+    setCategoryInfo(
+      categories[categoryId] || {
+        name: categoryId,
+        icon: '📦',
+        arabicName: categoryId
+      }
+    )
     window.scrollTo(0, 0)
   }, [categoryId])
 
   const addToCart = (product) => {
-    let size = selectedSize[product.id]
-    
-    // If category doesn't need size, set size to 'One Size'
+    let size = selectedSize[product.id + '-size']
+    let color = product.colors?.[currentImage[product.id] || 0]?.name
+
     if (categoriesWithoutSize.includes(product.category)) {
       size = 'One Size'
-    }
-    // For Hijab: size is the color name
-    else if (product.category === 'hijab') {
-      size = size || 'Beige'  // Default color
-    }
-    // For shoes
-    else if (product.category === 'shoes') {
+    } else if (product.category === 'hijab') {
+      size = size || 'Beige'
+    } else if (product.category === 'shoes') {
       size = size || '39'
-    }
-    // For clothing
-    else {
+    } else {
       size = size || 'M'
+      color = color || product.colors?.[0]?.name
     }
-    
-    const existingItem = cart.find(item => item.id === product.id && item.size === size)
-    
+
+    const existingItem = cart.find(
+      item => item.id === product.id && item.size === size
+    )
+
     let newCart
+
     if (existingItem) {
       newCart = cart.map(item =>
         item.id === product.id && item.size === size
@@ -2572,13 +2764,15 @@ function CategoryPage() {
           : item
       )
     } else {
-      newCart = [...cart, { 
-        ...product, 
-        size, 
+      newCart = [...cart,{ 
+        ...product,
+        size,
+        color,
+        image: product.colors?.[currentImage[product.id] || 0]?.image,
         quantity: 1 
       }]
     }
-    
+
     setCart(newCart)
     localStorage.setItem('cart', JSON.stringify(newCart))
     window.dispatchEvent(new Event('cartUpdated'))
@@ -2589,136 +2783,216 @@ function CategoryPage() {
     const notification = document.createElement('div')
     notification.className = 'notification'
     notification.textContent = message
+
     document.body.appendChild(notification)
-    
+
     setTimeout(() => notification.classList.add('show'), 100)
+
     setTimeout(() => {
       notification.classList.remove('show')
       setTimeout(() => notification.remove(), 300)
     }, 2000)
   }
 
-  // Function to render the correct size selector based on category
   const renderSizeSelector = (product) => {
-    // Categories WITHOUT size (no selector at all)
-    if (categoriesWithoutSize.includes(product.category)) {
-      return null
-    }
-    
-    // Hijab: Color selector with color swatches
-    if (product.category === 'hijab') {
-      return (
-        <div className="color-selector">
-          <label className="color-label">Color:</label>
-          <div className="color-options">
-            {hijabColors.map((color) => (
-              <button
-                key={color.name}
-                type="button"
-                className={`color-option ${selectedSize[product.id] === color.name ? 'active' : ''}`}
-                style={{ backgroundColor: color.code }}
-                onClick={() => setSelectedSize({ ...selectedSize, [product.id]: color.name })}
-                title={color.name}
-              />
-            ))}
-          </div>
-          <select 
-            id={`size-${product.id}`}
-            onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
-            className="size-select"
-            defaultValue="Beige"
-          >
-            {hijabColors.map((color) => (
-              <option key={color.name} value={color.name}>
-                {color.name}
-              </option>
-            ))}
-          </select>
-        </div>
-      )
-    }
-    
-    // Shoes: 38, 39, 40, 41
+
+    // Accessories: show images instead of size
+if (['accessories', 'hijab', 'bags', 'makeup'].includes(product.category)) {
+  return (
+    <div className="thumbnails">
+      {product.colors.map((img, index) => (
+        <img
+          key={index}
+          src={img.image}
+          alt=""
+          className={`thumb ${
+            (currentImage[product.id] || 0) === index ? 'active' : ''
+          }`}
+          onClick={() =>
+            setCurrentImage({
+              ...currentImage,
+              [product.id]: index
+            })
+          }
+        />
+      ))}
+    </div>
+  )
+}
+
+// Categories WITHOUT size (others)
+if (categoriesWithoutSize.includes(product.category)) {
+  return null
+}
+
+
     if (product.category === 'shoes') {
       return (
-        <select 
-          id={`size-${product.id}`}
-          onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
-          className="size-select"
-          defaultValue="39"
-        >
-          <option value="38">38</option>
-          <option value="39">39</option>
-          <option value="40">40</option>
-          <option value="41">41</option>
-        </select>
+        <>
+          {product.colors && (
+            <div className="color-selector">
+              <label className="color-label">Color:</label>
+
+              <div className="color-options">
+                {product.colors.map((color, index) => (
+                  <button
+                    key={color.name}
+                    type="button"
+                    className={`color-option ${
+                      (currentImage[product.id] || 0) === index
+                        ? 'active'
+                        : ''
+                    }`}
+                    style={{ backgroundColor: color.code }}
+                    onClick={() =>
+                      setCurrentImage({
+                        ...currentImage,
+                        [product.id]: index
+                      })
+                    }
+                  />
+                ))}
+              </div>
+            </div>
+          )}
+
+          <select
+            id={`size-${product.id}`}
+            onChange={(e) =>
+              setSelectedSize({
+                ...selectedSize,
+                [product.id + '-size']: e.target.value
+              })
+            }
+            className="size-select"
+            defaultValue="39"
+          >
+            <option value="38">38</option>
+            <option value="39">39</option>
+            <option value="40">40</option>
+            <option value="41">41</option>
+          </select>
+        </>
       )
     }
-    
-    // Clothing: S, M, L
-    return (
-      <select 
-        id={`size-${product.id}`}
-        onChange={(e) => setSelectedSize({ ...selectedSize, [product.id]: e.target.value })}
-        className="size-select"
-        defaultValue="M"
-      >
-        <option value="S">S</option>
-        <option value="M">M</option>
-        <option value="L">L</option>
-      </select>
-    )
+
+    if (product.colors) {
+      return (
+        <>
+          <div className="color-selector"> 
+            <label className="color-label">Color:</label> 
+            <div className="color-options"> 
+              {product.colors.map((color, index) => ( 
+                <button 
+                  key={color.name} 
+                  type="button" 
+                  className={`color-option ${
+                    (currentImage[product.id] || 0) === index ? 'active' : ''
+                  }`} 
+                  style={{ backgroundColor: color.code }} 
+                  onClick={() => 
+                    setCurrentImage({ 
+                      ...currentImage, 
+                      [product.id]: index 
+                    }) 
+                  }
+                /> 
+              ))} 
+            </div> 
+          </div> 
+          {/* SIZE */} 
+          <select 
+            onChange={(e) => 
+              setSelectedSize({ 
+                ...selectedSize, 
+                [product.id + '-size']: e.target.value 
+              })
+            } 
+            className="size-select" 
+            defaultValue="M" 
+          > 
+            <option value="S">S</option> 
+            <option value="M">M</option> 
+            <option value="L">L</option> 
+            <option value="XL">XL</option> 
+          </select>
+        </>
+      )
+    }
   }
 
   return (
     <div className="page">
       <div className="container">
-        <button onClick={() => navigate('/shop')} className="back-to-shop">
+
+        <button
+          onClick={() => navigate('/shop')}
+          className="back-to-shop"
+        >
           ← Back to Shop
         </button>
-
-        <div className="section-header">
-          <p className="section-label">{categoryInfo.icon} {categoryInfo.name}</p>
-          <h2 className="section-title">{categoryInfo.arabicName}</h2>
-          <div className="section-divider"></div>
+        <div className="section-header"> 
+          <p className="section-label">{categoryInfo.icon} {categoryInfo.name}</p> 
+          <h2 className="section-title">{categoryInfo.arabicName}</h2> 
+          <div className="section-divider"></div> 
         </div>
 
-        <div className="products-grid">
+        <div className="products-grid"> 
           {categoryProducts.length === 0 ? (
-            <div className="no-products">
-              <p>😊 No products in this category yet</p>
-              <button onClick={() => navigate('/shop')} className="btn-primary">
-                Back to Shop
-              </button>
-            </div>
-          ) : (
+            <div className="no-products"> 
+              <p>😊 No products in this category yet</p> 
+              <button onClick={() => navigate('/shop')} className="btn-primary"> 
+                Back to Shop 
+              </button> 
+            </div> 
+          ) : ( 
             categoryProducts.map((product, index) => (
               <div key={product.id} className="product-card slide-up" style={{ animationDelay: `${index * 0.1}s` }}>
-                <div className="product-image">
-                  <img src={product.image} alt={product.name} loading="lazy" />
-                  <span className="product-price">{product.price} MAD</span>
-                  {product.isNew && (
-                    <span className="product-badge new">✨ New</span>
-                  )}
-                </div>
-                <div className="product-info">
-                  <h3 className="product-name">{product.name}</h3>
-                  <div className="product-specs">
-                    <p className="product-spec">• {product.fabric}</p>
-                  </div>
-                  <div className="product-actions">
-                    {renderSizeSelector(product)}
-                    <button 
-                      onClick={() => addToCart(product)} 
-                      className="btn-primary full-width"
-                    >
-                      🛒 Add to Cart
-                    </button>
-                  </div>
-                </div>
+
+              <div className="product-image">
+                <img
+                  src={product.colors?.[currentImage[product.id] || 0]?.image}
+                  alt={product.name}
+                />
+
+                <button
+                  className="arrow right"
+                  onClick={() => nextImage(product.id, product.colors)}
+                >
+                  →
+                </button>
+
+                <span className="product-price">{product.price} MAD</span>
+              </div>
+
+              <div className="product-info">
+  <h3 className="product-name">{product.name}</h3>
+
+  {/* Accessories → show images here */}
+  {renderSizeSelector(product)}
+
+  {/* Other categories → show specs */}
+  {product.category !== 'accessories' && product.fabric && (
+    <div className="product-specs">
+      <p className="product-spec">• {product.fabric}</p>
+    </div>
+  )}
+
+  <div className="product-actions">
+   
+
+    <button 
+      onClick={() => addToCart(product)} 
+      className="btn-primary full-width"
+    >
+      🛒 Add to Cart
+    </button>
+  </div>
+</div>
+
               </div>
             ))
-          )}
+          )}  
         </div>
       </div>
     </div>
@@ -2873,37 +3147,37 @@ function Shop() {
     { 
       id: 'clothing', 
       name: 'Clothing',  
-      image: `${import.meta.env.BASE_URL}img/1.jpeg`,
+      image: `${import.meta.env.BASE_URL}img/a.jpg`,
       description: 'Modern & modest fashion',
     },
     { 
       id: 'shoes', 
       name: 'Shoes', 
-      image: `${import.meta.env.BASE_URL}img/2.jpg`,
+      image: `${import.meta.env.BASE_URL}img/b.jpg`,
       description: 'Elegant & comfortable footwear',
     },
     { 
       id: 'accessories', 
       name: 'Accessories', 
-      image: `${import.meta.env.BASE_URL}img/1.jpg`,
+      image: `${import.meta.env.BASE_URL}img/c.jpg`,
       description: 'Premium accessories',
     },
     { 
       id: 'bags', 
       name: 'Bags', 
-      image: `${import.meta.env.BASE_URL}img/5.jpg`,
+      image: `${import.meta.env.BASE_URL}img/d.jpg`,
       description: 'Stylish bags for every occasion',
     },
     { 
       id: 'hijab', 
       name: 'Hijab',
-      image: `${import.meta.env.BASE_URL}img/3.jpg`,
+      image: `${import.meta.env.BASE_URL}img/e.jpg`,
       description: 'Luxury fabrics & soft colors',
     },
     { 
       id: 'makeup', 
       name: 'Makeup',  
-      image: `${import.meta.env.BASE_URL}img/6.jpg`,
+      image: `${import.meta.env.BASE_URL}img/f.jpg`,
       description: 'Premium beauty products',
     }
   ]
