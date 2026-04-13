@@ -10,37 +10,37 @@ function Shop() {
     { 
       id: 'clothing', 
       name: 'Clothing',  
-      image: `${import.meta.env.BASE_URL}img/1.jpeg`,
+      image: `${import.meta.env.BASE_URL}img/a.jpg`,
       description: 'Modern & modest fashion',
     },
     { 
       id: 'shoes', 
       name: 'Shoes', 
-      image: `${import.meta.env.BASE_URL}img/2.jpg`,
+      image: `${import.meta.env.BASE_URL}img/b.jpg`,
       description: 'Elegant & comfortable footwear',
     },
     { 
       id: 'accessories', 
       name: 'Accessories', 
-      image: `${import.meta.env.BASE_URL}img/1.jpg`,
+      image: `${import.meta.env.BASE_URL}img/c.jpg`,
       description: 'Premium accessories',
     },
     { 
       id: 'bags', 
       name: 'Bags', 
-      image: `${import.meta.env.BASE_URL}img/5.jpg`,
+      image: `${import.meta.env.BASE_URL}img/d.jpg`,
       description: 'Stylish bags for every occasion',
     },
     { 
       id: 'hijab', 
       name: 'Hijab',
-      image: `${import.meta.env.BASE_URL}img/3.jpg`,
+      image: `${import.meta.env.BASE_URL}img/e.jpg`,
       description: 'Luxury fabrics & soft colors',
     },
     { 
       id: 'makeup', 
       name: 'Makeup',  
-      image: `${import.meta.env.BASE_URL}img/6.jpg`,
+      image: `${import.meta.env.BASE_URL}img/f.jpg`,
       description: 'Premium beauty products',
     }
   ]

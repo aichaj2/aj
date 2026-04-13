@@ -367,19 +367,7 @@
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
 }
 
-.product-image {
-  aspect-ratio: 3/4;
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-}
 
-.product-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
 
 .product-card:hover .product-image img {
   transform: scale(1.05);
@@ -1504,4 +1492,82 @@
     width: 28px;
     height: 28px;
   }
+}
+
+
+.product-image button:first-child {
+  left: 10px;
+}
+
+.product-image button:last-child {
+  right: 10px;
+}
+.product-image {
+  width: 100%;
+  height: 320px;        /* نفس الحجم لكل الصور */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f5f5f5;  /* خلفية باش يبان الفراغ مزيان */
+  border-radius: 10px;
+  position: relative;
+}
+
+/* الصورة */
+.product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain; 
+  transform: scale(1.1); 
+}
+
+/* الأسهم */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(0,0,0,0.4);
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  cursor: pointer;
+  border-radius: 50%;
+  opacity: 0;
+  transition: 0.3s;
+}
+
+/* اليسار */
+.arrow.left {
+  left: 10px;
+}
+
+/* اليمين */
+.arrow.right {
+  right: 10px;
+}
+
+/* يظهر غير ملي hover */
+.product-image:hover .arrow {
+  opacity: 1;
+}
+.thumbnails {
+  display: flex;
+  gap: 6px;
+  margin: 8px 0;
+}
+
+.thumb {
+  width: 40px;
+  height: 40px;
+  object-fit: cover;
+  border-radius: 6px;
+  cursor: pointer;
+  opacity: 0.6;
+  border: 2px solid transparent;
+  transition: 0.3s;
+}
+
+.thumb.active {
+  opacity: 1;
+  border: 2px solid black;
 }

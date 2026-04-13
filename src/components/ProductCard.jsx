@@ -6,7 +6,15 @@ function ProductCard({ product, onAddToCart }) {
   return (
     <div className="product-card">
       <div className="product-image">
-        <img src={product.image} alt={product.name} />
+        <button onClick={() => prevImage(product.id, product.images)}>⬅</button>
+
+        <img 
+          src={product.images[currentImage[product.id] || 0]} 
+          alt={product.name} 
+        />
+
+        <button onClick={() => nextImage(product.id, product.images)}>➡</button>
+
         <span className="product-price">{product.price} MAD</span>
       </div>
       <div className="product-info">
