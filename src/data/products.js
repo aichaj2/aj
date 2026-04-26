@@ -308,11 +308,7 @@ export const products = [
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea5.jpeg`},
     { name: "d1", code: "#ceb396", image:`${import.meta.env.BASE_URL}img/ea6.jpeg`},
     { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea7.jpeg`},
-    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea8.jpeg`},
-    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea9.jpeg`},
-    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea10.jpeg`},
-    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea11.jpeg`},
-    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea12.jpeg`}
+    { name: "d3", code: "#854baf", image: `${import.meta.env.BASE_URL}img/ea8.jpeg`}
   
   ]
   },

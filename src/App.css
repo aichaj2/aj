@@ -398,6 +398,7 @@
   font-family: 'Cormorant Garamond', serif;
   font-size: 1.25rem;
   color: var(--text);
+  
   margin-bottom: 0.5rem;
 }
 
@@ -1570,4 +1571,70 @@
 .thumb.active {
   opacity: 1;
   border: 2px solid black;
+}
+/* IMAGE ZOOM */
+.product-img {
+  width: 100%;
+  transition: transform 0.4s ease;
+}
+
+.product-card:hover .product-img {
+  transform: scale(1.1);
+}
+
+/* BADGE */
+.product-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: black;
+  color: white;
+  font-size: 12px;
+  padding: 4px 8px;
+  border-radius: 6px;
+  z-index: 2;
+}
+
+/* QUICK ADD */
+.quick-add {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  background: #292524;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 8px;
+  opacity: 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.product-card:hover .quick-add {
+  opacity: 1;
+}
+
+/* ARROWS */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: white;
+  border: none;
+  padding: 5px 8px;
+  cursor: pointer;
+  opacity: 0;
+}
+
+.product-card:hover .arrow {
+  opacity: 1;
+}
+
+.arrow.left { left: 5px; }
+.arrow.right { right: 5px; }
+
+/* RATING */
+.product-rating {
+  color: #fbbf24;
+  margin: 5px 0;
 }

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react'
 import { useParams, useNavigate } from 'react-router-dom'
-import { products } from '../data/products'
+
 
 function CategoryPage() {
 
@@ -14,6 +14,7 @@ function CategoryPage() {
   const [categoryProducts, setCategoryProducts] = useState([])
   const [categoryInfo, setCategoryInfo] = useState({})
   const [currentImage, setCurrentImage] = useState({})
+  const [products, setProducts] = useState([])
 
   const categories = {
     'clothing': { name: 'Clothing', arabicName: 'Clothing' },
@@ -68,16 +69,15 @@ function CategoryPage() {
   }, [])
 
   useEffect(() => {
-    const filtered = products.filter(p => p.category === categoryId)
-    setCategoryProducts(filtered)
-    setCategoryInfo(
-      categories[categoryId] || {
-        name: categoryId,
-        icon: '📦',
-        arabicName: categoryId
-      }
-    )
-    window.scrollTo(0, 0)
+    fetch("http://localhost:5000/products")
+      .then(res => res.json())
+      .then(data => {
+        setProducts(data)
+
+        const filtered = data.filter(p => p.category === categoryId)
+        setCategoryProducts(filtered)
+      })
+      .catch(err => console.log(err))
   }, [categoryId])
 
   const addToCart = (product) => {
