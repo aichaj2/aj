@@ -68,17 +68,31 @@ function CategoryPage() {
     }
   }, [])
 
-  useEffect(() => {
-  fetch("http://localhost:5000/products")
+useEffect(() => {
+  if (!categoryId) return
+
+  console.log("URL categoryId:", categoryId)
+
+  fetch("http://127.0.0.1:5000/products")
     .then(res => res.json())
     .then(data => {
 
-      const filtered = data.filter(
-        p => p.category.toLowerCase().trim() === categoryId.toLowerCase().trim()
+      console.log("ALL DATA:", data)
+
+      data.forEach(p => {
+        console.log("COMPARE =>", p.category, "==", categoryId)
+      })
+
+      const filtered = data.filter(p =>
+        p.category.toLowerCase().trim() === categoryId.toLowerCase().trim()
       )
+
+      console.log("FILTERED:", filtered)
 
       setCategoryProducts(filtered)
     })
+    .catch(err => console.log("ERROR:", err))
+
 }, [categoryId])
 
   useEffect(() => {
