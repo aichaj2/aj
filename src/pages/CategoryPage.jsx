@@ -69,15 +69,20 @@ function CategoryPage() {
   }, [])
 
   useEffect(() => {
-    fetch("http://localhost:5000/products")
-      .then(res => res.json())
-      .then(data => {
-        setProducts(data)
+  fetch("http://localhost:5000/products")
+    .then(res => res.json())
+    .then(data => {
 
-        const filtered = data.filter(p => p.category === categoryId)
-        setCategoryProducts(filtered)
-      })
-      .catch(err => console.log(err))
+      const filtered = data.filter(
+        p => p.category.toLowerCase().trim() === categoryId.toLowerCase().trim()
+      )
+
+      setCategoryProducts(filtered)
+    })
+}, [categoryId])
+
+  useEffect(() => {
+    setCategoryInfo(categories[categoryId] || {})
   }, [categoryId])
 
   const addToCart = (product) => {
