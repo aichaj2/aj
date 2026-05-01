@@ -73,7 +73,7 @@ useEffect(() => {
 
   console.log("URL categoryId:", categoryId)
 
-  fetch("http://127.0.0.1:5000/products")
+  fetch("https://aj-production-89a8.up.railway.app/products")
     .then(res => res.json())
     .then(data => {
 
