@@ -469,17 +469,19 @@ const products = [
 app.use(cors())
 app.use(express.json())
 
+
+
+
+app.get("/", (req, res) => {
+  res.json({ status: "ok", message: "API khdama 👍" })
+})
+
 app.get("/products", (req, res) => {
   res.json(products)
 })
 
-// test route
-app.get("/", (req, res) => {
-  res.send("API khdama 👍")
-})
-
 const PORT = process.env.PORT || 5000
 
-app.listen(process.env.PORT, "0.0.0.0", () => {
-  console.log("Server running on", process.env.PORT)
+app.listen(PORT, "0.0.0.0", () => {
+  console.log("Server running on port", PORT)
 })
